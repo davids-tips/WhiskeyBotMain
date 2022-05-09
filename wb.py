@@ -5,6 +5,7 @@ from disnake.ext import commands
 import datetime
 import os
 import requests
+from dotenv import load_dotenv
 
 #import logging
 
@@ -127,7 +128,11 @@ async def lnk(ctx, link):
 
 
 
+load_dotenv()
 
 
 
-bot.run('')
+token = os.getenv('TOKEN')
+
+
+bot.run(token)
