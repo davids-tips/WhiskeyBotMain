@@ -130,4 +130,4 @@ async def lnk(ctx, link):
 
 
 
-bot.run('Nzk4MjAxODM4ODY3NTc4OTQw.X_xlZA.vaHBEYr5oIZovVvCWPNIeJVAOcM')
+bot.run('')
