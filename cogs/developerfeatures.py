@@ -16,7 +16,7 @@ class developerfeatures(commands.Cog):
     @commands.command(name='ggemoji', description='This Command Returns a list of Emojis for the Guild(Server) it is Run within.')
     async def gemoji(self, ctx, optional_arg: int = None):
      guild = int
-     print(f"Guild output before check  ++ {guild}",tag='Debug', tag_color='blue', color='cyan')
+     print(f"Guild output before check  ++ {guild}")
      if guild == None:
      	guild = ctx.get_guild()
      	print ( Fore.CYAN + '[DEBUG]' + Fore.YELLOW + 'Detected No Guild Input')

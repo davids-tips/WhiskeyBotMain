@@ -4,10 +4,10 @@ import disnake
 from disnake.ext import commands
 import datetime
 import os
-import requests
+# import requests
 from dotenv import load_dotenv
-import aiohttp
-import aiofiles
+#import aiohttp
+#import aiofiles
 
 #import logging
 
