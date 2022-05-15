@@ -32,7 +32,7 @@ class events(commands.Cog):
         embed.set_footer(text="Logging System")
         embed.set_author(name='WhiskeyBot', icon_url=f"{self.bot.user.avatar}")
         embed.description = f"""**Bot Startup and Information**
-        Start Time: `{datetime.now().strftime('%b-%d-%Y at %I:%M:%S')}`
+        Start Time: `{datetime.now().strftime('%b-%d-%Y at %I:%M:%S')} {timeofday}`
         Bot account: `{self.bot.user.name}`
         Bot ID: `{self.bot.user.id}`
         Guilds: `{len(self.bot.guilds):,}`
