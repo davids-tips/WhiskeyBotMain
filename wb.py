@@ -15,7 +15,7 @@ import aiofiles
 
 
 
-#i:mport cogs.whiskey as img
+import cogs.whiskey
 from colorama import Fore, Back, Style
 bot = commands.Bot(command_prefix="$")
 ct = datetime.datetime.now()
@@ -25,14 +25,27 @@ print('Connecting to Discord API.')
 print('Please Wait')
 
 @bot.event
-async def on_ready(autopost=True, case_insensitive=True):
+async def on_ready():
     print(Fore.GREEN + 'Connected!' + Fore.WHITE)
     print(Fore.GREEN + 'Bot is ready!' + Fore.WHITE)
     print(Fore.CYAN + 'Waiting For Commands' + Fore.WHITE)
     bot.get_guild(798726719573065749)
     channel = bot.get_channel(798726720181633047)
     await channel.send('Bot Online!')
-
+    embed = disnake.Embed()
+    embed.title = f"**Online**"
+    embed.description = f"[`{datetime.datetime.now().strftime('%b-%d-%Y`] @ [`%I:%M:%S')}`]\n\n" \
+    f"- Bot account: `{bot.user.name}`\n" \
+    f'- Bot ID: `{bot.user.id}`\n' \
+    f"- Guilds: `{len(bot.guilds):,}`\n" \
+    f"- Users: `{len(list(bot.get_all_members()))}`\n" \
+#    f"- Project Repo Version: `{repo.version}`\n" 
+    f"- Disnake Version: `{disnake.__version__}`\n" 
+    embed.set_footer(text="Logging System")
+    GUILD_ID = 798726719573065749
+    CHANNEL_ID  = 798726720181633047
+    location = bot.get_guild(GUILD_ID).get_channel(CHANNEL_ID)
+    await location.send(embed=embed)
 # Add Cogs
 
 #bot.load_extension('cogs.social')
