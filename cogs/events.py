@@ -38,13 +38,10 @@ class events(commands.Cog):
         Loaded Cogs: `{list(self.bot.cogs)}`
         Developer: `whiskeythefox#7339`
         """
-
         GUILD_ID = 798726719573065749
         CHANNEL_ID = 798726720181633047
         location = self.bot.get_guild(GUILD_ID).get_channel(CHANNEL_ID)
         await location.send(embed=embed)
-
-        pass
 
     @commands.command(name="uptime")
     async def uptime(self, ctx):
