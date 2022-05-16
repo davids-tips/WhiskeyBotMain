@@ -2,9 +2,14 @@ import disnake
 from disnake.ext import commands
 from colorama import Fore, Back, Style
 from datetime import datetime
-
+import time
+#below are two date time functions that have different functions but one of them adds to the other durring startup
 start_time = datetime.now()
-
+mytime = time.localtime()
+if mytime.tm_hour < 12:
+    timeofday = 'AM'
+else:
+    timeofday = 'PM'
 
 class events(commands.Cog):
     """Useful Features for Bot Development."""
@@ -15,24 +20,16 @@ class events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        import time
-        mytime = time.localtime()
-        if mytime.tm_hour < 12:
-            timeofday = 'AM'
-        else:
-            timeofday = 'PM'
-        print(Fore.GREEN + 'Connected!' + Fore.WHITE)
-        print(Fore.GREEN + 'Bot is ready!' + Fore.WHITE)
+        print(Fore.GREEN + 'Connected!')
+        print('Bot is ready!' + Fore.WHITE)
         print(Fore.CYAN + 'Waiting For Commands' + Fore.WHITE)
-        self.bot.get_guild(798726719573065749)
-        channel = self.bot.get_channel(798726720181633047)
-        await channel.send('Bot Online!')
         embed = disnake.Embed()
         embed.title = f"**Online**"
         embed.set_footer(text="Logging System")
         embed.set_author(name='WhiskeyBot', icon_url=f"{self.bot.user.avatar}")
         embed.description = f"""**Bot Startup and Information**
         Start Time: `{datetime.now().strftime('%b-%d-%Y at %I:%M:%S')} {timeofday}`
+        Current Uptime: <t:{round(datetime.timestamp(start_time))}:R>
         Bot account: `{self.bot.user.name}`
         Bot ID: `{self.bot.user.id}`
         Guilds: `{len(self.bot.guilds):,}`
@@ -51,7 +48,10 @@ class events(commands.Cog):
 
     @commands.command(name="uptime")
     async def uptime(self, ctx):
-        await ctx.send(f"{datetime.now() - start_time}")
+        now = datetime.now()
+        delta = datetime.now() - start_time
+        days, hours, minutes, seconds = delta.days, delta.seconds // 3600, (delta.seconds // 60) % 60, delta.seconds % 60
+        await ctx.send(f'`{days} Days {hours} hrs {minutes} mins {seconds} secs`')
 
 
 def setup(bot):
