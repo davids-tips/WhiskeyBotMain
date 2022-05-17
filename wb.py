@@ -19,7 +19,7 @@ from colorama import Fore, Back, Style
 
 bot = commands.Bot(command_prefix="$")
 ct = datetime.datetime.now()
-guild_ids = []
+guild_ids = [798726719573065749]
 print('Starting Bot')
 print('Connecting to Discord API.')
 print('Please Wait')

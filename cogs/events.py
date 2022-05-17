@@ -1,9 +1,10 @@
 import disnake
 from disnake.ext import commands
-from colorama import Fore, Back, Style
+from colorama import Fore
 from datetime import datetime
 import time
-#below are two date time functions that have different functions but one of them adds to the other durring startup
+
+# below are two date time functions that have different functions but one of them adds to the other durring startup
 start_time = datetime.now()
 mytime = time.localtime()
 if mytime.tm_hour < 12:
@@ -11,6 +12,7 @@ if mytime.tm_hour < 12:
 else:
     timeofday = 'PM'
 
+guild_ids = [798726719573065749]
 class events(commands.Cog):
     """Useful Features for Bot Development."""
 
@@ -47,8 +49,23 @@ class events(commands.Cog):
     async def uptime(self, ctx):
         now = datetime.now()
         delta = datetime.now() - start_time
-        days, hours, minutes, seconds = delta.days, delta.seconds // 3600, (delta.seconds // 60) % 60, delta.seconds % 60
+        days, hours, minutes, seconds = delta.days, delta.seconds // 3600, (
+                    delta.seconds // 60) % 60, delta.seconds % 60
         await ctx.send(f'`{days} Days {hours} hrs {minutes} mins {seconds} secs`')
+
+    @commands.command(name="ping")
+    async def ping(self, ctx: commands.Context):
+        await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
+
+    @commands.slash_command(name="ping", description='Check Bots Latency', guild_ids=guild_ids)
+    async def ping(self, interaction):
+        self.bot.get_command("ping").invoke()
+
+
+    @commands.slash_command(name="ee", description='Check Bots Latency', guild_ids=guild_ids)
+    async def ping(self,inter):
+        await inter.response.send_message("Pong!")
+
 
 
 def setup(bot):
