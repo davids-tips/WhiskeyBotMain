@@ -54,16 +54,17 @@ class events(commands.Cog):
         await ctx.send(f'`{days} Days {hours} hrs {minutes} mins {seconds} secs`')
 
     @commands.command(name="ping")
-    async def ping(self, ctx: commands.Context):
-        await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
+    async def ping(self, inter: disnake.ApplicationCommandInteraction):
+        """Get the bot's current websocket latency."""
+        await inter.response.send_message(f"Pong! {round(self.bot.latency * 1000)}ms")
 
-    @commands.slash_command(name="ping", description='Check Bots Latency', guild_ids=guild_ids)
-    async def ping(self, interaction):
-        self.bot.get_command("ping").invoke()
+    @commands.slash_command(name="ping", description="Checks Bot's Latency", guild_ids=guild_ids)
+    async def ping(self, inter: disnake.ApplicationCommandInteraction):
+        self.bot.get_command('ping')
 
 
     @commands.slash_command(name="ee", description='Check Bots Latency', guild_ids=guild_ids)
-    async def ping(self,inter):
+    async def pingee(self,inter):
         await inter.response.send_message("Pong!")
 
 
