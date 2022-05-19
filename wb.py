@@ -38,7 +38,7 @@ print('Please Wait')
 bot.load_extension('cogs.developerfeatures')
 bot.load_extension('cogs.events')
 print(Fore.YELLOW + '[✓]' + '[Developer Features Cog] ' + Fore.GREEN + 'Loading Complete' + Fore.WHITE)
-
+print(Fore.YELLOW + '[✓]' + '[Events Cog] ' + Fore.GREEN + 'Loading Complete' + Fore.WHITE)
 
 # below command is to learn how to pull images from a message, will eventually be intregated into dnd homebrew approval grab command
 @bot.command(name='cmd')

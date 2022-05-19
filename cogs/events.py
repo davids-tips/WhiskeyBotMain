@@ -60,7 +60,11 @@ class events(commands.Cog):
 
     @commands.slash_command(name="ping", description="Checks Bot's Latency", guild_ids=guild_ids)
     async def ping(self, inter: disnake.ApplicationCommandInteraction):
-        self.bot.get_command('ping')
+        print ('Executing ping command via slash')
+        
+        print(f'{command}')
+        await self.bot.send(f'{command}')
+        await self.bot.invoke(self.bot.command.get_commands())
 
 
     @commands.slash_command(name="ee", description='Check Bots Latency', guild_ids=guild_ids)
