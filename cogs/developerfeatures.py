@@ -1,7 +1,7 @@
 import disnake
 from disnake.ext import commands
 from colorama import Fore
-
+guild_ids = [798726719573065749]
 
 def setup(bot):
     bot.add_cog(developerfeatures(bot))
@@ -23,14 +23,21 @@ class developerfeatures(commands.Cog):
         await self.bot.close()
         print('Bot Logged off')
 
-    @commands.command(name='getemojis',
-                      description='This Command Returns a list of Emojis for the Guild(Server) it is Run within.')
+
+    @commands.slash_command(name='logoff', guild_ids=guild_ids)
+    async def slashlogoff(self, inter):
+        await inter.send('`Bot Is Logging Off`')
+        await self.bot.close()
+        print('Bot Logged off')
+        
+        
+    @commands.slash_command(name='getemojis', description='This Command Returns a list of Emojis for the Guild(Server) it is Run within.', guild_ids=guild_ids)
     async def getemojis(self, ctx, optional_arg: int = None):
         guild = int
         print(f"Guild output before check  ++ {guild}")
         if None == guild:
             guild = ctx.get_guild()
-            print(Fore.CYAN + '[DEBUG]' + Fore.YELLOW + 'Detected No Guild Input')
+            # print(Fore.CYAN + '[DEBUG]' + Fore.YELLOW + 'Detected No Guild Input')
             await ctx.send('Debug: Guild is equal to None', delete_after=5)
         await ctx.send(ctx.guild.emojis)
-        print(ctx.guild.emojis)
+        # print(ctx.guild.emojis)

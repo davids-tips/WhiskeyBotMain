@@ -45,13 +45,14 @@ class events(commands.Cog):
         location = self.bot.get_guild(GUILD_ID).get_channel(CHANNEL_ID)
         await location.send(embed=embed)
 
-    @commands.command(name="uptime")
-    async def uptime(self, ctx):
+    @commands.slash_command(name="uptime",description="checks bots uptime", guild_ids=guild_ids)
+    async def uptime(self, interaction):
+        print("uptime")
         now = datetime.now()
         delta = datetime.now() - start_time
         days, hours, minutes, seconds = delta.days, delta.seconds // 3600, (
                     delta.seconds // 60) % 60, delta.seconds % 60
-        await ctx.send(f'`{days} Days {hours} hrs {minutes} mins {seconds} secs`')
+        await interaction.send(f'Bot has been Online for: `{days} Days {hours} hrs {minutes} mins {seconds} secs`')
 
     @commands.command(name="ping")
     async def ping(self, inter: disnake.ApplicationCommandInteraction):
