@@ -1,7 +1,8 @@
-import discord
-from discord.ext import commands
+import disnake
+from disnake.ext import commands
 from cogs.listvar import scritch
 import json
+
 
 def setup(bot):
     bot.add_cog(embd(bot))
@@ -12,8 +13,8 @@ class embd(commands.Cog):
         self.bot = bot
         print('loading embed cog')
 
-@commands.command(name='cmd', description='boop someone', alias=['cmd1','cmd2'])
-async def boop(self, ctx):
-            print(f'{ctx.author.name} initiated boop command.')
+@commands.command(name='attachment', description='lists messages attachments url')
+async def attachment(self, ctx):
+            print(f'{ctx.author.name} initiated message attachment command.')
             await ctx.send(f'ctx.message.attachments')
             print(ctx.message.attachments)
