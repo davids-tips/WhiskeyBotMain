@@ -90,6 +90,9 @@ class events(commands.Cog):
             else:
                 ctx.respond('{option -> reaction must be checkmark, furheart, or both.')
                 
+    @commands.command(name='heh')
+    async def heh(self, ctx, nerdz, nerdz2):
+        await ctx.send('heh cute')
 
     @commands.slash_command(name="homebrewapproved", guild_ids=config)
     async def hbapproval(self, ctx, messagecount: int = None):

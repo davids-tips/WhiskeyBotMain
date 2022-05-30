@@ -52,29 +52,47 @@ class CommandErrorHandler(commands.Cog):
         if isinstance(error, ignored):
             return
 
+        if isinstance(error, disnake.ext.commands.MissingRequiredArgument):
+            embed = disnake.Embed()
+            embed.title = f'Error'
+            embed.add_field(name='Error Location', value=f'`{ctx.command}`', inline=False)
+            embed.description = f'A missing argument was missing in {ctx.command}. Please run the command again but including the missing argument'
+            embed.add_field(name='Type of Error', value=f'`Missing argument: {error.param}`', inline=False)
+            embed.add_field(name='Correct Usage', value=f"`{ctx.command.usage}`", inline=False)
+            embed.set_footer(text='An Exception has occured ... Details Above.')
+            await ctx.send(embed=embed)
+            return
+
         if isinstance(error, disnake.ext.commands.errors.NotOwner):
-            embed = disnake.embed
+            embed = disnake.Embed()
             embed.title = f"Error"
-            embed.description = f"Hey {ctx.author.name}! You do not have permission to run this command. You do not own this bot"
-            embed.set_footer = "An Exception has occured... Details Above."
+            embed.add_field(name='Error Location', value=f'{ctx.command}', inline=True)
+            embed.description = f"Hey {ctx.author.name}! You do not have permission to run this command. You do not own this bot."
+            embed.set_footer(text="An Exception has occurred ... Details Above.")
             await ctx.send(embed=embed)
             return
 
         if isinstance(error, disnake.ext.commands.PrivateMessageOnly):
-            embed = disnake.embed
+            embed = disnake.Embed()
             embed.title = f"Error"
-            embed.description = f"This command is only supported in privite messages"
-            embed.set_footer = "An Exception has occured... Details Above"
+            embed.add_field(name='Error Location', value=f'{ctx.command}', inline=True)
+            embed.description = f"This command is only supported in private messages."
+            embed.set_footer(text="An Exception has occurred ... Details Above.")
             await ctx.send(embed=embed)
+            return
+
+        if isinstance(error, disnake.ext.commmands.NoPrivateMessage):
+            embed = disnake.Embed()
+            embed.title = f"Error"
+            embed.add_field(name='Error Location', value=f'{ctx.command}',inline=True)
+            embed.description = f"This command cannot be executed in private messages."
+            embed.set_footer(text="An Exception has occurred ... Details Above.")
+            await ctx.send(embed=embed)
+            return
 
         if isinstance(error, commands.DisabledCommand):
             await ctx.send(f'{ctx.command} has been disabled.')
 
-        elif isinstance(error, commands.NoPrivateMessage):
-            try:
-                await ctx.author.send(f'{ctx.command} can not be used in Private Messages.')
-            except disnake.HTTPException:
-                pass
 
         # For this error example we check to see where it came from...
         elif isinstance(error, commands.BadArgument):
