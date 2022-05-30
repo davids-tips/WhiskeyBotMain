@@ -58,7 +58,7 @@ class CommandErrorHandler(commands.Cog):
             embed.add_field(name='Error Location', value=f'`{ctx.command}`', inline=False)
             embed.description = f'A missing argument was missing in {ctx.command}. Please run the command again but including the missing argument'
             embed.add_field(name='Type of Error', value=f'`Missing argument: {error.param}`', inline=False)
-            embed.add_field(name='Correct Usage', value=f"`$    {ctx.command.name} {ctx.command.signature}`", inline=False)
+            embed.add_field(name='Correct Usage', value=f"`{ctx.prefix} {ctx.command.name} {ctx.command.signature}`", inline=False)
             embed.set_footer(text='An Exception has occured ... Details Above.')
             await ctx.send(embed=embed)
             return
