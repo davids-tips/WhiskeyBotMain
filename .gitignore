@@ -2,3 +2,8 @@
 dist
 pycache
 retroterminal
+/.idea/*
+test.txt
+listtest.py
+/.idea/
+.txt
